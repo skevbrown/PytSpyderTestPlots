@@ -41,24 +41,32 @@ def polar(x, y):
 polarvec = np.vectorize(polar); # Vectorize these func's to operate on vectors
 rectvec  = np.vectorize(rect)
 
+tfinal = 13*np.pi;
 
+vecFreq = 2; vecAmp = 1; vecDC = 0.0;
+ceFreq = 5;
+ceSamp = np.arange(0,tfinal, (1/vecFreq)*2*np.pi*vecFreq/ceFreq )
+ceSampAmp = np.array( [ 1.0 ] *len(ceSamp))
 
-vecFreq = 2
-tiVec = np.arange(0,13*np.pi,13*np.pi/1000)
+tiVec = np.arange(0,tfinal, tfinal/1000)
 lenTi = len(tiVec)
-ampVec1 = (1/2)* (np.cos(vecFreq*tiVec)+1)
+ampVec1 = vecAmp* (np.cos(vecFreq*tiVec)  + vecDC)   
 compExp = np.array( [ complex(0,0)] * lenTi )
 
+plt.figure()
 plt.plot(tiVec,ampVec1,'r',linewidth=0.3)
+plt.plot(ceSamp,ceSampAmp,'bo')
 plt.grid()
 #plt.gca().set_aspect('equal', adjustable='box'); plt.draw();
 plt.show()
 #print(dir(plt.gca()))
 
-#plt.figure()
-ceFreq = 8
-compExp.real = np.cos(ceFreq*vecFreq*tiVec)
-compExp.imag = np.sin(ceFreq*vecFreq*tiVec)
+
+
+compExp.real = np.cos(ceFreq*tiVec)
+compExp.imag = np.sin(ceFreq*tiVec)
+
+ 
 
 [compMag, compAng] = polarvec(compExp.real,compExp.imag); compMag = compMag * ampVec1;
 [compExp.real, compExp.imag ] = rectvec(compMag,compAng )
@@ -75,7 +83,7 @@ print("Centroid: {} {}".format(centx,centy))
 #print("Polygon area: {}".format(polygon.area) )
 #print("Polygon length: {}".format(polygon.length) )
 
-
+plt.figure()
 plt.plot(centx,centy,'ro');
 plt.plot(compExp.real,compExp.imag,'b',linewidth=0.2)
 plt.gca().set_xlim(-1.5,1.5); plt.gca().set_ylim(-1.5,1.5); 
