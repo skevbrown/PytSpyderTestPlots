@@ -41,10 +41,10 @@ def polar(x, y):
 polarvec = np.vectorize(polar); # Vectorize these func's to operate on vectors
 rectvec  = np.vectorize(rect)
 
-tfinal = 13*np.pi;
+tfinal = 8*np.pi;
 
 vecFreq = 2; vecAmp = 1; vecDC = 0.0;
-ceFreq = 5;
+ceFreq = 6;
 ceSamp = np.arange(0,tfinal, (1/vecFreq)*2*np.pi*vecFreq/ceFreq )
 ceSampAmp = np.array( [ 1.0 ] *len(ceSamp))
 
@@ -90,4 +90,12 @@ plt.gca().set_xlim(-1.5,1.5); plt.gca().set_ylim(-1.5,1.5);
 plt.gca().set_aspect('equal', adjustable='box'); plt.grid(); plt.draw();
 #print( dir(compExp) )
 plt.show();
+
+plt.figure()
+plt.plot(tiVec,compExp.real,'r',linewidth=0.5)
+plt.plot(tiVec,compExp.imag,'b',linewidth=0.5)
+plt.grid()
+plt.show()
+
+
 
