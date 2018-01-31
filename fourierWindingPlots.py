@@ -41,7 +41,7 @@ def polar(x, y):
 polarvec = np.vectorize(polar); # Vectorize these func's to operate on vectors
 rectvec  = np.vectorize(rect)
 
-tfinal = 8*np.pi;
+tfinal = (1/2)*np.pi;
 
 vecFreq = 2; vecAmp = 1; vecDC = 0.0;
 ceFreq = 6;
@@ -53,7 +53,7 @@ lenTi = len(tiVec)
 ampVec1 = vecAmp* (np.cos(vecFreq*tiVec)  + vecDC)   
 compExp = np.array( [ complex(0,0)] * lenTi )
 
-plt.figure()
+plt.figure(1)
 plt.plot(tiVec,ampVec1,'r',linewidth=0.3)
 plt.plot(ceSamp,ceSampAmp,'bo')
 plt.grid()
@@ -83,15 +83,15 @@ print("Centroid: {} {}".format(centx,centy))
 #print("Polygon area: {}".format(polygon.area) )
 #print("Polygon length: {}".format(polygon.length) )
 
-plt.figure()
+plt.figure(2)
 plt.plot(centx,centy,'ro');
-plt.plot(compExp.real,compExp.imag,'b',linewidth=0.2)
+plt.plot(compExp.real,compExp.imag,'b',linewidth=0.6)
 plt.gca().set_xlim(-1.5,1.5); plt.gca().set_ylim(-1.5,1.5); 
 plt.gca().set_aspect('equal', adjustable='box'); plt.grid(); plt.draw();
 #print( dir(compExp) )
 plt.show();
 
-plt.figure()
+plt.figure(23)
 plt.plot(tiVec,compExp.real,'r',linewidth=0.5)
 plt.plot(tiVec,compExp.imag,'b',linewidth=0.5)
 plt.grid()
